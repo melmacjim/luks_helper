@@ -13,6 +13,7 @@
 #  cryptsetup luksClose lvm_mount_name
 #------------------------------------------------------
 
+set -e
 
 take_input () {
   echo "Do you want to use the last storage device detected ($(ls /dev/sd* |tail -n1))? [enter YES to confirm] " && read CHOICE
@@ -112,13 +113,13 @@ if [[ "$1" = "-h" || "$1" = "--help" ]]; then
   print_help
   exit 0
 fi
-take_input || exit 1
-partition_drive || exit 1
-create_luks_container || exit 1
-create_physical_volume || exit 1
-create_volume_group || exit 1
-creat_logical_volume || exit 1
-format_inside_ecrypted_volume || exit 1
-mount_encrypted_vollume || exit 1
-create_open_close_script || exit 1
+take_input
+partition_drive
+create_luks_container
+create_physical_volume
+create_volume_group
+creat_logical_volume
+format_inside_ecrypted_volume
+mount_encrypted_vollume
+create_open_close_script
 
